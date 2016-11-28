@@ -1,0 +1,13 @@
+---
+name: scope_probe
+
+templates:
+  probe_ctl.erb: bin/probe_ctl
+
+packages:
+- scope
+
+properties:
+  weave.scope.probe.target_addr:
+    description: Target address for probe reports.
+    default: 127.0.0.1:4040

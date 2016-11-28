@@ -1,0 +1,5 @@
+check process scope_probe
+  with pidfile /var/vcap/sys/run/scope/probe
+  start program "/var/vcap/jobs/scope_probe/bin/probe_ctl start"
+  stop program "/var/vcap/jobs/scope_probe/bin/probe_ctl stop"
+  group vcap

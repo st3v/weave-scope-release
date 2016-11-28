@@ -1,0 +1,35 @@
+#!/bin/bash
+
+RUN_DIR=/var/vcap/sys/run/scope
+LOG_DIR=/var/vcap/sys/log/scope
+PKG_DIR=/var/vcap/packages/scope
+PIDFILE=${RUN_DIR}/probe
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    echo $$ > $PIDFILE
+
+    cd $PKG_DIR
+
+    chmod +x scope
+
+    exec ./scope --mode=probe --probe.docker=false --probe.kubernetes=false --weave=false --no-app --probe.conntrack=false <%= p('weave.scope.probe.target_addr') %> \
+      >>  $LOG_DIR/probe.stdout.log \
+      2>> $LOG_DIR/probe.stderr.log
+
+    ;;
+
+  stop)
+    kill -9 `cat $PIDFILE`
+    rm -f $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+
+esac
