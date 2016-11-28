@@ -15,7 +15,9 @@ case $1 in
 
     cd $PKG_DIR
 
-    exec $PKG_DIR/scope --mode=app --weave=false \
+    chmod +x scope
+
+    exec scope --mode=app --weave=false \
       >>  $LOG_DIR/app.stdout.log \
       2>> $LOG_DIR/app.stderr.log
 
