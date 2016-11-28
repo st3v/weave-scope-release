@@ -1,0 +1,10 @@
+---
+name: scope_app
+
+templates:
+  ctl.erb: bin/ctl
+
+packages:
+- scope
+
+properties: {}

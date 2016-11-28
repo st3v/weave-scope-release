@@ -1,0 +1,6 @@
+check process scope_app
+  with pidfile /var/vcap/sys/run/scope/app
+  start program "/var/vcap/jobs/scope_app/bin/ctl start"
+  stop program "/var/vcap/jobs/scope_app/bin/ctl stop"
+  group vcap
+
