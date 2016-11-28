@@ -12,3 +12,6 @@ addons:
       scope:
         probe:
           target_addr: 10.244.5.4
+          garden:
+            network: tcp
+            addr: 127.0.0.1:7777
