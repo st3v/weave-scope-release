@@ -1,0 +1,20 @@
+---
+packages:
+- name: scope
+  version: 7d7b93b0a0c2b635248aa83e779629840e1f167a
+  fingerprint: 7d7b93b0a0c2b635248aa83e779629840e1f167a
+  sha1: 069a99735314b030ca014c5f7cc52462b2feab81
+  dependencies: []
+jobs:
+- name: scope_app
+  version: 6dc51feab35bd6baae1565f26e098723e691c6d9
+  fingerprint: 6dc51feab35bd6baae1565f26e098723e691c6d9
+  sha1: 7eed0467d979422581cc622ca2e059fc5049e2a8
+- name: scope_probe
+  version: 90af49b8b3ae88c4e634370854f62da0206e1a87
+  fingerprint: 90af49b8b3ae88c4e634370854f62da0206e1a87
+  sha1: 32a4419de1e173f0bc66e38815e534f74cec6ffd
+commit_hash: 96d2e7bb
+uncommitted_changes: true
+name: weave-scope
+version: 0.0.2
