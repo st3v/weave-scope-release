@@ -2,8 +2,9 @@
 
 RUN_DIR=/var/vcap/sys/run/scope
 LOG_DIR=/var/vcap/sys/log/scope
-PKG_DIR=/var/vcap/packages/scope
 PIDFILE=${RUN_DIR}/probe
+JQ=/var/vcap/packages/jq/jq
+SCOPE=/var/vcap/packages/scope/scope
 
 case $1 in
 
@@ -13,11 +14,11 @@ case $1 in
 
     echo $$ > $PIDFILE
 
-    cd $PKG_DIR
+    chmod +x $JQ
+    export SCOPE_HOSTNAME=`cat /var/vcap/bosh/spec.json | $JQ -r '.job.name + "/" + (.index | tostring)'`
 
-    chmod +x scope
-
-    exec ./scope --mode=probe --probe.docker=false --probe.kubernetes=false --weave=false --no-app --probe.conntrack=false <%= p('weave.scope.probe.target_addr') %> \
+    chmod +x $SCOPE
+    exec $SCOPE --mode=probe --probe.docker=false --probe.kubernetes=false --weave=false --no-app --probe.conntrack=false <%= p('weave.scope.probe.target_addr') %> \
       >>  $LOG_DIR/probe.stdout.log \
       2>> $LOG_DIR/probe.stderr.log
 

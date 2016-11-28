@@ -1,4 +1,8 @@
 ---
+jq/jq:
+  object_id: 11d29960-8aec-4f83-afed-9b58657a8f5c
+  sha: d8e36831c3c94bb58be34dd544f44a6c6cb88568
+  size: 3027945
 scope/scope:
   object_id: 42cf6b41-07e6-4bda-86aa-37d7dff8f458
   sha: da4676499d228fdb67b382cc4a9f8471f53d79ee
