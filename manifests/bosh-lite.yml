@@ -1,0 +1,56 @@
+director_uuid: <%= `bosh status --uuid` %>
+
+name: weave-scope
+
+jobs:
+- name: weave-scope-app
+  instances: 1
+  networks:
+  - name: weave_scope_1
+    static_ips:
+    - 10.244.5.4
+  resource_pool: weave_scope_z1
+  persistent_disk: 1024
+  templates:
+  - release: weave-scope
+    name: scope_app
+
+networks:
+- type: manual
+  name: weave_scope_1
+  subnets:
+  - reserved:
+    - 10.244.5.2-10.244.5.3
+    - 10.244.5.12-10.244.5.254
+    static:
+    - 10.244.5.4
+    cloud_properties:
+      name: random
+    gateway: 10.244.5.1
+    range: 10.244.5.0/24
+
+compilation:
+  workers: 3
+  cloud_properties: {}
+  network: weave_scope_1
+  reuse_compilation_vms: true
+
+update:
+  canary_watch_time: 1000-180000
+  max_in_flight: 1
+  serial: true
+  update_watch_time: 1000-180000
+  canaries: 1
+
+resource_pools:
+- name: weave_scope_z1
+  network: weave_scope_1
+  cloud_properties: {}
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: 3147
+
+releases:
+- name: weave-scope
+  version: latest
+
