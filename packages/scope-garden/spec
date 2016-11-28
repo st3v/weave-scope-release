@@ -1,0 +1,7 @@
+---
+name: scope-garden
+
+dependencies: []
+
+files:
+- scope-garden/*

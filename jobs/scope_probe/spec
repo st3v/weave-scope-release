@@ -3,6 +3,7 @@ name: scope_probe
 
 templates:
   probe_ctl.erb: bin/probe_ctl
+  probe_garden_ctl.erb: bin/probe_garden_ctl
 
 packages:
 - scope
@@ -12,3 +13,12 @@ properties:
   weave.scope.probe.target_addr:
     description: Target address for probe reports.
     default: 127.0.0.1:4040
+  weave.scope.probe.garden.network:
+    description: Garden network type (unix or tcp)
+    default: unix
+  weave.scope.probe.garden.addr:
+    description: Garden network address
+    default: /var/vcap/data/garden/garden.sock
+  weave.scope.probe.plugins.root:
+    description: Scope probe plugins root
+    default: /var/vcap/data/scope/plugins
