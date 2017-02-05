@@ -17,7 +17,7 @@ case $1 in
     export SCOPE_HOSTNAME=`cat /var/vcap/bosh/spec.json | /var/vcap/packages/jq/jq -r '.job.name + "/" + (.index | tostring)'`
 
     chmod +x $SCOPE_GARDEN
-    exec $SCOPE_GARDEN --gardenNetwork=<%= p('weave.scope.probe.garden.network') %> --gardenAddr=<%= p('weave.scope.probe.garden.addr') %> --pluginsRoot=${SCOPE_PLUGINS_ROOT} \
+    exec $SCOPE_GARDEN --gardenNetwork=<%= p('weave.scope.probe.garden.network') %> --gardenAddr=<%= p('weave.scope.probe.garden.addr') %> --pluginsRoot=${SCOPE_PLUGINS_ROOT} --hostname=${SCOPE_HOSTNAME}\
       >>  $LOG_DIR/probe_garden.stdout.log \
       2>> $LOG_DIR/probe_garden.stderr.log
 
