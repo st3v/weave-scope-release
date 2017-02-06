@@ -1,0 +1,7 @@
+---
+name: scope-bosh
+
+dependencies: []
+
+files:
+- scope-bosh/*

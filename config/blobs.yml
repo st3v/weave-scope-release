@@ -11,3 +11,7 @@ scope-garden/scope-garden:
   object_id: e6897836-2f42-4306-9a92-b2fb885308da
   sha: bb3896307e92f91a9b726418eb78041c8d8ce6dd
   size: 5578769
+scope-bosh/scope-bosh:
+  object_id: e6ea2a00-de03-45a9-9061-b9a0d589821a
+  sha: 0a1995d8d4ef6ef0fefcc3f2028f9722cde6e9fe
+  size: 5232459

@@ -4,10 +4,12 @@ name: scope_probe
 templates:
   probe_ctl.erb: bin/probe_ctl
   probe_garden_ctl.erb: bin/probe_garden_ctl
+  probe_bosh_ctl.erb: bin/probe_bosh_ctl
 
 packages:
 - scope
 - scope-garden
+- scope-bosh
 - jq
 
 properties:
@@ -20,6 +22,9 @@ properties:
   weave.scope.probe.garden.addr:
     description: Garden network address
     default: /var/vcap/data/garden/garden.sock
+  weave.scope.probe.bosh.job_spec_path:
+    description: Path to Bosh job spec
+    default: /var/vcap/bosh/spec.json
   weave.scope.probe.plugins.root:
     description: Scope probe plugins root
     default: /var/vcap/data/scope/plugins
