@@ -1,0 +1,35 @@
+---
+packages:
+- name: jq
+  version: d3e7ba6720589ea09f49f903cf7c44952568439b
+  fingerprint: d3e7ba6720589ea09f49f903cf7c44952568439b
+  sha1: db6343da0a24523d9b3815c7930302ef4bd02ffb
+  dependencies: []
+- name: scope
+  version: 7d7b93b0a0c2b635248aa83e779629840e1f167a
+  fingerprint: 7d7b93b0a0c2b635248aa83e779629840e1f167a
+  sha1: '069a99735314b030ca014c5f7cc52462b2feab81'
+  dependencies: []
+- name: scope-bosh
+  version: 0e86b9a3a4e59d620bb6b8c2fc62287fc420aab3
+  fingerprint: 0e86b9a3a4e59d620bb6b8c2fc62287fc420aab3
+  sha1: a404d82bef918087d9d259eadd90efd1248a43e5
+  dependencies: []
+- name: scope-garden
+  version: e3f2ece4fa95c965d9d9f536e16c2f2964b5c0bd
+  fingerprint: e3f2ece4fa95c965d9d9f536e16c2f2964b5c0bd
+  sha1: '00189e6864d915f3b7484c952fbf9c3a20038169'
+  dependencies: []
+jobs:
+- name: scope_app
+  version: 6dc51feab35bd6baae1565f26e098723e691c6d9
+  fingerprint: 6dc51feab35bd6baae1565f26e098723e691c6d9
+  sha1: 7eed0467d979422581cc622ca2e059fc5049e2a8
+- name: scope_probe
+  version: 5d8ab3ffa8343b9f0c681965a78ae95f1c2003f6
+  fingerprint: 5d8ab3ffa8343b9f0c681965a78ae95f1c2003f6
+  sha1: 4a87e1c79d8125a1f60513bddf31d858ec35f736
+commit_hash: c7e943b5
+uncommitted_changes: true
+name: weave-scope
+version: 0.0.7
