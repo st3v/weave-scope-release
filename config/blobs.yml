@@ -4,12 +4,12 @@ jq/jq:
   sha: d8e36831c3c94bb58be34dd544f44a6c6cb88568
   size: 3027945
 scope/scope:
-  object_id: 42cf6b41-07e6-4bda-86aa-37d7dff8f458
-  sha: da4676499d228fdb67b382cc4a9f8471f53d79ee
-  size: 29072464
+  object_id: 52822cae-52f6-43ff-a3e0-176bd6905bb4
+  sha: d721bb11ce1a3e58de894ad9f2e15356694aba85
+  size: 29653232
 scope-garden/scope-garden:
-  object_id: e6897836-2f42-4306-9a92-b2fb885308da
-  sha: bb3896307e92f91a9b726418eb78041c8d8ce6dd
+  object_id: a31f3506-02d9-4c0f-b4a7-0c57c95b53bf
+  sha: 35c5d93d8433e293544e36c5f0fb550ba1056e68
   size: 5578769
 scope-bosh/scope-bosh:
   object_id: e6ea2a00-de03-45a9-9061-b9a0d589821a
