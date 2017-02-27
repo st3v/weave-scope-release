@@ -8,9 +8,9 @@ scope/scope:
   sha: d721bb11ce1a3e58de894ad9f2e15356694aba85
   size: 29653232
 scope-garden/scope-garden:
-  object_id: a31f3506-02d9-4c0f-b4a7-0c57c95b53bf
-  sha: 35c5d93d8433e293544e36c5f0fb550ba1056e68
-  size: 5578769
+  object_id: 35e26257-17dd-4146-a930-4391aef4c1f7
+  sha: 0df2fbc9f2c72625b92c673daa7a5dad461e735a
+  size: 5718833
 scope-bosh/scope-bosh:
   object_id: e6ea2a00-de03-45a9-9061-b9a0d589821a
   sha: 0a1995d8d4ef6ef0fefcc3f2028f9722cde6e9fe
