@@ -3,12 +3,10 @@ name: scope_probe
 
 templates:
   probe_ctl.erb: bin/probe_ctl
-  probe_garden_ctl.erb: bin/probe_garden_ctl
   probe_bosh_ctl.erb: bin/probe_bosh_ctl
 
 packages:
 - scope
-- scope-garden
 - scope-bosh
 - scope-jq
 
@@ -21,27 +19,6 @@ properties:
   weave.scope.probe.plugins.root:
     description: Scope probe plugins root
     default: /var/vcap/data/scope/plugins
-  weave.scope.probe.garden.network:
-    description: Garden network type (unix or tcp)
-    default: unix
-  weave.scope.probe.garden.addr:
-    description: Garden network address
-    default: /var/vcap/data/garden/garden.sock
-  weave.scope.probe.garden.refresh_interval:
-    description: Interval for fetching conatiner details from Garden
-    default: 5s
-  weave.scope.probe.cf.api_url:
-    description: Cloud Foundry API URL
-  weave.scope.probe.cf.client_id:
-    description: Cloud Foundry client ID
-  weave.scope.probe.cf.client_secret:
-    description: Cloud Foundry client secret
-  weave.scope.probe.cf.skip_ssl_verify:
-    description: Determines whether to skip SSL cert validation when fetching apps from CF
-    default: false
-  weave.scope.probe.cf.refresh_interval:
-    description: Interval for fetching app details from CF
-    default: 5s
   weave.scope.probe.bosh.job_spec_path:
     description: Path to Bosh job spec
     default: /var/vcap/bosh/spec.json

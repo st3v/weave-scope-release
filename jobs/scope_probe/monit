@@ -8,8 +8,3 @@ check process scope_probe_bosh
   start program "/var/vcap/jobs/scope_probe/bin/probe_bosh_ctl start"
   stop program "/var/vcap/jobs/scope_probe/bin/probe_bosh_ctl stop"
   group vcap
-check process scope_probe_garden
-  with pidfile /var/vcap/sys/run/scope/probe_garden
-  start program "/var/vcap/jobs/scope_probe/bin/probe_garden_ctl start"
-  stop program "/var/vcap/jobs/scope_probe/bin/probe_garden_ctl stop"
-  group vcap

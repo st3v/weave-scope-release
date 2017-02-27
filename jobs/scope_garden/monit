@@ -1,0 +1,5 @@
+check process scope_probe_garden
+  with pidfile /var/vcap/sys/run/scope/probe_garden
+  start program "/var/vcap/jobs/scope_garden/bin/probe_garden_ctl start"
+  stop program "/var/vcap/jobs/scope_garden/bin/probe_garden_ctl stop"
+  group vcap
