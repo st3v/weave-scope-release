@@ -17,9 +17,23 @@ case $1 in
     export SCOPE_HOSTNAME=`cat /var/vcap/bosh/spec.json | /var/vcap/packages/scope-jq/jq -r '.job.name + "/" + (.index | tostring)'`
 
     chmod +x $SCOPE_GARDEN
-    exec $SCOPE_GARDEN --garden.network=<%= p('weave.scope.probe.garden.network') %> --garden.addr=<%= p('weave.scope.probe.garden.addr') %> --plugins-root=${SCOPE_PLUGINS_ROOT} --hostname=${SCOPE_HOSTNAME}\
-      >>  $LOG_DIR/probe_garden.stdout.log \
-      2>> $LOG_DIR/probe_garden.stderr.log
+    exec $SCOPE_GARDEN \
+      --plugins-root=${SCOPE_PLUGINS_ROOT} \
+      --hostname=${SCOPE_HOSTNAME}\
+      --garden.network=<%= p('weave.scope.probe.garden.network') %> \
+      --garden.addr=<%= p('weave.scope.probe.garden.addr') %> \
+      --garden.refresh-interval=<%= p('weave.scope.probe.garden.refresh_interval') %> \
+      <% if_p('weave.scope.probe.cf.api_url', 'weave.scope.probe.cf.client_id') do |url, clientId| %> \
+      --cf.api-url <%= url %> \
+      --cf.client-id <%= clientId %> \
+      --cf.client-secret <%= p('weave.scope.probe.cf.client_secret') %> \
+      --cf.refresh-interval <%= p('weave.scope.probe.cf.refresh_interval') %> \
+      <% if p('weave.scope.probe.cf.skip_ssl_verify') %> \
+      --cf.skip-ssl-verify \
+      <% end %> \
+      <% end %> \
+        >>  $LOG_DIR/probe_garden.stdout.log \
+        2>> $LOG_DIR/probe_garden.stderr.log
 
     ;;
 
