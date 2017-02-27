@@ -10,12 +10,14 @@ packages:
 - scope
 - scope-garden
 - scope-bosh
-- jq
+- scope-jq
 
 properties:
   weave.scope.probe.target_addr:
     description: Target address for probe reports.
     default: 127.0.0.1:4040
+  weave.scope.probe.service_token:
+    description: Service token for Weave Cloud
   weave.scope.probe.garden.network:
     description: Garden network type (unix or tcp)
     default: unix
