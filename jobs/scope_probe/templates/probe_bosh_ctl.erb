@@ -14,7 +14,7 @@ case $1 in
 
     echo $$ > $PIDFILE
 
-    export SCOPE_HOSTNAME=`cat /var/vcap/bosh/spec.json | /var/vcap/packages/jq/jq -r '.job.name + "/" + (.index | tostring)'`
+    export SCOPE_HOSTNAME=`cat /var/vcap/bosh/spec.json | /var/vcap/packages/scope-jq/jq -r '.job.name + "/" + (.index | tostring)'`
 
     chmod +x $SCOPE_BOSH
     exec $SCOPE_BOSH --jobSpec=<%= p('weave.scope.probe.bosh.job_spec_path') %> --pluginsRoot=${SCOPE_PLUGINS_ROOT} --hostname=${SCOPE_HOSTNAME}\
