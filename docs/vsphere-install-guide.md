@@ -37,7 +37,7 @@ bosh Director PWD: $BOSH_PWD
 
     ```
 
-4. Edit ~/github/weave-scope-release/manifests/vsphere-scope-app.yml as follows:  
+4. Edit `~/github/weave-scope-release/manifests/vsphere-scope-app.yml` as follows:  
 
 
     ```    
@@ -82,7 +82,7 @@ bosh Director PWD: $BOSH_PWD
 
     ```
 
-7. Edit ~/github/weave-scope-release/manifests/addon.yml as follows:   
+7. Edit `~/github/weave-scope-release/manifests/addon.yml` as follows:   
 
     ```
     Replace target_addr (line 14) with the IP address from:  
