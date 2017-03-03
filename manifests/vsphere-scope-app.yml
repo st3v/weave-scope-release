@@ -1,0 +1,43 @@
+---
+name: scope-app
+director_uuid: <YOUR UID> 
+releases:
+- name: weave-scope
+  version: latest
+stemcells:
+- alias: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+  os: ubuntu-trusty
+  version: '<YOUR VERSION>'
+instance_groups:
+- name: scope_app
+  azs:
+  - <YOUR AZ1>
+  - <YOUR AZ2>
+  - <YOUR AZ3>
+  instances: 1
+  lifecycle: service
+  jobs:
+  - name: scope_app
+    release: weave-scope
+    consumes: {}
+    provides: {}
+  vm_type: medium.cpu
+  stemcell: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+  properties: {}
+  update:
+    serial: true
+    max_in_flight: 1
+  networks:
+  - name: <YOUR NETWORK>
+    default:
+    - dns
+    - gateway
+  persistent_disk_type: '1024'
+  vm_extensions: []
+update:
+  canaries: 1
+  canary_watch_time: 30000-300000
+  update_watch_time: 30000-300000
+  max_in_flight: 1
+  max_errors: 2
+  serial: true
