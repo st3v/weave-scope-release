@@ -90,7 +90,7 @@ bosh Director PWD: $BOSH_PWD
     
 12. Browse back to the URL you opened in Step 10, and watch the nodes appear, one by one:
 
-
+<img src="https://github.com/bendalby82/weave-scope-release/blob/master/docs/images/full-scope.png" width="500">
 
     
     
