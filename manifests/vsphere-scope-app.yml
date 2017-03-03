@@ -21,7 +21,7 @@ instance_groups:
     release: weave-scope
     consumes: {}
     provides: {}
-  vm_type: medium.cpu
+  vm_type: <YOUR VM>
   stemcell: bosh-vsphere-esxi-ubuntu-trusty-go_agent
   properties: {}
   update:
