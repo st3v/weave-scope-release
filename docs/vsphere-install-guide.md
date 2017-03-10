@@ -134,5 +134,8 @@ bosh Director PWD: $BOSH_PWD
 <img src="https://github.com/bendalby82/weave-scope-release/blob/master/docs/images/full-scope.png" width="600">
 
     
-    
+## TODO
+Remove dependency on PCF specifically:
+- Using Ops Manager as the VM with the bosh client and uaac installed (in this case doesn’t matter where they are installed - its just a convenience)
+- --ca-cert /var/tempest/workspaces/default/root_ca_certificate is a specific Ops Manager VM naming convention
 
