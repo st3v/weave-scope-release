@@ -1,4 +1,4 @@
-# vSphere Installation Guide
+# vSphere Installation Guide for PCF
 ## Prerequisites
 You will need the following information:  
 Cloud Controller API: $CC_HOST  
@@ -23,13 +23,13 @@ bosh Director PWD: $BOSH_PWD
 
     ```    
     $ mkdir -p ~/github  
-    $ cd ~/githu  
+    $ cd ~/github  
     $ git clone https://github.com/st3v/weave-scope-release.git
     $ cd weave-scope-release  
 
     ```    
 
-3.  Target your Bosh Director VM, entering $BOSH_UID and $BOSH_PWD credentials when prompted:
+3.  Target your Bosh Director VM, entering $BOSH_UID and $BOSH_PWD credentials when prompted. By using this VM, we leverage an existing cloud config, but this could be any pre-existing Bosh:
 
 
     ```    
@@ -82,7 +82,7 @@ bosh Director PWD: $BOSH_PWD
 
     ```
 
-7. Edit `~/github/weave-scope-release/manifests/addon.yml` as follows:   
+7. Edit `~/github/weave-scope-release/manifests/addon.yml` as follows (you may also need to edit the version to include "DEV"):   
 
     ```
     Replace target_addr (line 14) with the IP address from:  
