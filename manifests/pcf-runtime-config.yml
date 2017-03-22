@@ -1,0 +1,34 @@
+releases:
+- name: weave-scope
+  version: <WEAVE-SCOPE-RELEASE-VERSION>
+
+addons:
+- name: scope-probe
+  jobs:
+  - name: scope_probe
+    release: weave-scope
+    properties:
+      weave:
+        scope:
+          probe:
+            target_addr: <SCOPE-APP-IP>
+- name: scope-garden
+  include:
+    jobs:
+    - name: garden
+      release: garden-runc
+  jobs:
+  - name: scope_garden
+    release: weave-scope
+    properties:
+      weave:
+        scope:
+          probe:
+            garden:
+              network: unix
+              addr: /var/vcap/data/garden/garden.sock
+            cf:
+              api_url: https://<CF-API-URL>
+              client_id: scope-cf-admin-ro
+              client_secret: scope-cf-admin-ro-secret
+              skip_ssl_verify: true
