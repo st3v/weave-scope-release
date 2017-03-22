@@ -1,3 +1,4 @@
+---
 director_uuid: <%= `bosh status --uuid` %>
 
 name: weave-scope

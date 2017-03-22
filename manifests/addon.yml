@@ -1,3 +1,4 @@
+---
 releases:
 - name: weave-scope
   version: 0.0.9
@@ -7,28 +8,28 @@ addons:
   jobs:
   - name: scope_probe
     release: weave-scope
-  properties:
-    weave:
-      scope:
-        probe:
-          target_addr: 10.244.5.4
+    properties:
+      weave:
+        scope:
+          probe:
+            target_addr: 10.244.5.4
 - name: scope-garden
-  jobs:
-  - name: scope_garden
-    release: weave-scope
   include:
     jobs:
     - name: garden
       release: garden-runc
-  properties:
-    weave:
-      scope:
-        probe:
-          garden:
-            network: tcp
-            addr: 127.0.0.1:7777
-          cf:
-            api_url: https://api.bosh-lite.com
-            client_id: admin-ro
-            client_secret: admin-ro-secret
-            skip_ssl_verify: true
+  jobs:
+  - name: scope_garden
+    release: weave-scope
+    properties:
+      weave:
+        scope:
+          probe:
+            garden:
+              network: tcp
+              addr: 127.0.0.1:7777
+            cf:
+              api_url: https://api.bosh-lite.com
+              client_id: admin-ro
+              client_secret: admin-ro-secret
+              skip_ssl_verify: true

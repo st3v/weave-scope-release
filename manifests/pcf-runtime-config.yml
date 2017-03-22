@@ -1,3 +1,4 @@
+---
 releases:
 - name: weave-scope
   version: <WEAVE-SCOPE-RELEASE-VERSION>
