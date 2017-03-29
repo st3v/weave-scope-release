@@ -8,6 +8,10 @@ SCOPE=/var/vcap/packages/scope/scope
 SCOPE_PLUGINS_ROOT=<%= p('weave.scope.probe.plugins.root') %>
 TARGET=<%= p('weave.scope.probe.target_addr') %>
 
+<% if_link('scope_app') do |app| %>
+TARGET=<%= app.instances[0].address %>:4040
+<% end %>
+
 <% if_p('weave.scope.probe.service_token') do |token| %>
 TARGET='--service-token=<%= token %>'
 <% end %>

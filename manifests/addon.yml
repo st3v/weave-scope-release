@@ -8,11 +8,10 @@ addons:
   jobs:
   - name: scope_probe
     release: weave-scope
-    properties:
-      weave:
-        scope:
-          probe:
-            target_addr: 10.244.5.4
+    consumes:
+      scope_app:
+        from: scope_app
+        deployment: weave-scope
 - name: scope-garden
   include:
     jobs:

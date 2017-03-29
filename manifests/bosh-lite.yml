@@ -8,13 +8,15 @@ jobs:
   instances: 1
   networks:
   - name: weave_scope_1
-    static_ips:
-    - 10.244.5.4
   resource_pool: weave_scope_z1
   persistent_disk: 1024
   templates:
   - release: weave-scope
     name: scope_app
+    provides:
+      scope_app:
+        as: scope_app
+        shared: true
 
 networks:
 - type: manual
@@ -23,8 +25,7 @@ networks:
   - reserved:
     - 10.244.5.2-10.244.5.3
     - 10.244.5.12-10.244.5.254
-    static:
-    - 10.244.5.4
+    static: []
     cloud_properties:
       name: random
     gateway: 10.244.5.1
