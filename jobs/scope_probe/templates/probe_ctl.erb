@@ -1,20 +1,34 @@
 #!/bin/bash
 
+<%
+  target = nil
+
+  # service_token takes precedence over target_addr and link properties
+  if_p('weave.scope.probe.service_token') do |token|
+    target = '--service-token=' + token
+  end
+
+  # target_addr takes precendence over link
+  if_p('weave.scope.probe.target_addr') do |address|
+    target = address unless target
+  end
+
+  # use link if neither service_token nor target_addr have been specified
+  if_link('scope_app') do |link|
+    target = link.instances[0].address + ':4040' unless target
+  end
+
+  # fallback to localhost if target has not been set explicitly or through a link
+  target = "127.0.0.1:4040" unless target
+%>
+
 RUN_DIR=/var/vcap/sys/run/scope
 LOG_DIR=/var/vcap/sys/log/scope
 PIDFILE=${RUN_DIR}/probe
 JQ=/var/vcap/packages/scope-jq/jq
 SCOPE=/var/vcap/packages/scope/scope
 SCOPE_PLUGINS_ROOT=<%= p('weave.scope.probe.plugins.root') %>
-TARGET=<%= p('weave.scope.probe.target_addr') %>
-
-<% if_link('scope_app') do |app| %>
-TARGET=<%= app.instances[0].address %>:4040
-<% end %>
-
-<% if_p('weave.scope.probe.service_token') do |token| %>
-TARGET='--service-token=<%= token %>'
-<% end %>
+TARGET=<%= target %>
 
 case $1 in
 
