@@ -8,7 +8,12 @@ packages:
 - scope
 
 provides:
-- name: scope_app
+- name: weave_scope_app
   type: http
+  properties:
+  - weave.scope.app.http.port
 
-properties: {}
+properties:
+  weave.scope.app.http.port:
+    description: Port the Weave Scope app uses to listen for HTTP requests
+    default: 4040

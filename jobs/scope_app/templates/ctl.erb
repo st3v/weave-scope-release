@@ -17,7 +17,7 @@ case $1 in
 
     chmod +x scope
 
-    exec ./scope --mode=app --weave=false \
+    exec ./scope --mode=app --weave=false --app.http.address=:<%= p('weave.scope.app.http.port') %> \
       >>  $LOG_DIR/app.stdout.log \
       2>> $LOG_DIR/app.stderr.log
 

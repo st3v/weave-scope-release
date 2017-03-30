@@ -11,7 +11,7 @@ packages:
 - scope-jq
 
 consumes:
-- name: scope_app
+- name: weave_scope_app
   type: http
   optional: true
 

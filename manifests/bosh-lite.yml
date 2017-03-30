@@ -14,8 +14,8 @@ jobs:
   - release: weave-scope
     name: scope_app
     provides:
-      scope_app:
-        as: scope_app
+      weave_scope_app:
+        as: weave_scope_app
         shared: true
 
 networks:

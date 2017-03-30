@@ -14,8 +14,8 @@
   end
 
   # use link if neither service_token nor target_addr have been specified
-  if_link('scope_app') do |link|
-    target = link.instances[0].address + ':4040' unless target
+  if_link('weave_scope_app') do |link|
+    target = link.instances[0].address + ':' + link.p('weave.scope.app.http.port').to_s unless target
   end
 
   # fallback to localhost if target has not been set explicitly or through a link

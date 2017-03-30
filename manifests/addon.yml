@@ -9,8 +9,8 @@ addons:
   - name: scope_probe
     release: weave-scope
     consumes:
-      scope_app:
-        from: scope_app
+      weave_scope_app:
+        from: weave_scope_app
         deployment: weave-scope
 - name: scope-garden
   include:
