@@ -1,7 +1,8 @@
 ---
 name: scope-bosh
 
-dependencies: []
+dependencies:
+- scope-go
 
 files:
-- scope-bosh/*
+- github.com/st3v/scope-bosh/**/*.go

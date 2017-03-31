@@ -3,7 +3,7 @@
 RUN_DIR=/var/vcap/sys/run/scope
 LOG_DIR=/var/vcap/sys/log/scope
 PIDFILE=${RUN_DIR}/probe_bosh
-SCOPE_BOSH=/var/vcap/packages/scope-bosh/scope-bosh
+SCOPE_BOSH=/var/vcap/packages/scope-bosh/bin/scope-bosh
 SCOPE_PLUGINS_ROOT=<%= p('weave.scope.probe.plugins.root') %>
 
 case $1 in

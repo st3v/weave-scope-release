@@ -1,3 +1,15 @@
-set -e -x
+#!/bin/bash
 
-cp scope-garden/* ${BOSH_INSTALL_TARGET}
+set -eux
+
+export GOROOT=/var/vcap/packages/scope-go/go
+export PATH=${GOROOT}/bin:${PATH}
+
+PACKAGE_NAME=github.com/st3v/scope-garden
+mkdir -p ${BOSH_INSTALL_TARGET}/src/${PACKAGE_NAME}
+cp -a ${BOSH_COMPILE_TARGET}/${PACKAGE_NAME}/* ${BOSH_INSTALL_TARGET}/src/${PACKAGE_NAME}
+export GOPATH=${BOSH_INSTALL_TARGET}
+
+go install ${PACKAGE_NAME}
+
+rm -rf ${BOSH_INSTALL_TARGET}/pkg ${BOSH_INSTALL_TARGET}/src

@@ -3,7 +3,7 @@
 RUN_DIR=/var/vcap/sys/run/scope
 LOG_DIR=/var/vcap/sys/log/scope
 PIDFILE=${RUN_DIR}/probe_garden
-SCOPE_GARDEN=/var/vcap/packages/scope-garden/scope-garden
+SCOPE_GARDEN=/var/vcap/packages/scope-garden/bin/scope-garden
 SCOPE_PLUGINS_ROOT=<%= p('weave.scope.probe.plugins.root') %>
 
 case $1 in

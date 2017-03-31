@@ -1,0 +1,6 @@
+[submodule "src/github.com/st3v/scope-garden"]
+	path = src/github.com/st3v/scope-garden
+	url = https://github.com/st3v/scope-garden.git
+[submodule "src/github.com/st3v/scope-bosh"]
+	path = src/github.com/st3v/scope-bosh
+	url = https://github.com/st3v/scope-bosh.git

@@ -1,7 +1,8 @@
 ---
 name: scope-garden
 
-dependencies: []
+dependencies:
+- scope-go
 
 files:
-- scope-garden/*
+- github.com/st3v/scope-garden/**/*.go
