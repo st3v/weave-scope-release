@@ -1,3 +1,5 @@
-set -e -x
+#!/bin/bash
 
-cp scope/* ${BOSH_INSTALL_TARGET}
+set -eux
+
+cp ${BOSH_COMPILE_TARGET}/scope/* ${BOSH_INSTALL_TARGET}
