@@ -1,7 +1,7 @@
 ---
 releases:
 - name: weave-scope
-  version: <%= `bosh releases | grep weave-scope | cut -d'|' -f3 | tr -d '*' | tr -d ' '` %>
+  version: <%= `git -C ~/workspace/weave-scope-release describe --abbrev=0 --tags | tr -d 'v'` %>
 
 addons:
 - name: scope-probe

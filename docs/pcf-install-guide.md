@@ -25,7 +25,7 @@ You will need the following information which can be retrieved from the Director
 1. Upload the latest weave-scope-release to BOSH
     ```bash
     cd ~/workspace/weave-scope-release
-    bosh upload release $(ls releases/weave-scope/weave-scope-*.yml | sort -r | head -n1)
+    bosh upload release releases/weave-scope/weave-scope-$(git describe --abbrev=0 --tags | tr -d 'v').yml
     ```
 
 1. Edit `~/workspace/weave-scope-release/manifests/pcf/scope-app.yml` as follows:
