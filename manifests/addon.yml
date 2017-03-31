@@ -29,6 +29,6 @@ addons:
               addr: 127.0.0.1:7777
             cf:
               api_url: https://api.bosh-lite.com
-              client_id: admin
-              client_secret: admin-secret
+              username: admin
+              password: admin
               skip_ssl_verify: true
