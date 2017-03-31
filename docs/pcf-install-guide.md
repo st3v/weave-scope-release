@@ -29,12 +29,6 @@ You will need the following information which can be retrieved from the Director
     ```
 
 1. Edit `~/workspace/weave-scope-release/manifests/pcf-scope-app.yml` as follows:
-   * Replace `<BOSH-UUID>`, `<STEMCELL-NAME>`, and `<STEMCELL-OS>`:
-     ```bash
-     sed -i "s/<BOSH-DIRECTOR-UUID>/$(bosh status --uuid)/g" manifests/pcf-scope-app.yml
-     sed -i "s/<STEMCELL-NAME>/$(bosh stemcells | grep agent | cut -d'|' -f2 | tr -d ' ' | uniq | head -n1)/g" manifests/pcf-scope-app.yml
-     sed -i "s/<STEMCELL-OS>/$(bosh stemcells | grep agent | cut -d'|' -f3 | tr -d ' ' | uniq | head -n1)/g" manifests/pcf-scope-app.yml
-     ```
    * Replace `<SCOPE-APP-AZ>` with one of the names in the `azs` section retrieved from `bosh cloud-config`
    * Replace `<SCOPE-APP-VM-TYPE>` with one of the name in the `vm_types` section retrieved from `bosh cloud-config`, e.g. `medium.cpu`:
    * Replace `<SCOPE-APP-NETWORK>` with one of the names in the `networks` section retrieved from `bosh cloud-config`
@@ -44,7 +38,7 @@ You will need the following information which can be retrieved from the Director
     bosh -d ~/workspace/weave-scope-release/manifests/pcf-scope-app.yml deploy
     ```
 
-1. Verify the Scope App is up and running by pointing your browser at the IP address assigned to the Scope App instance and port `4040`. You can obtain the IP via `bosh vms scope-app`. If everything went well, you should see the following.
+1. Verify the Scope App is up and running by pointing your browser at the IP address assigned to the Scope App instance and port `4040`. You can obtain the IP via `bosh vms weave-scope`. If everything went well, you should see the following.
 
    <img src="images/scope-app-no-hosts.png">
 
@@ -60,14 +54,6 @@ You will need the following information which can be retrieved from the Director
    ```
 
 1. Edit `~/workspace/weave-scope-release/manifests/pcf-runtime-config.yml` as follows:
-   * Set the version for the `weave-scope` release
-     ```bash
-     sed -i "s/<WEAVE-SCOPE-RELEASE-VERSION>/$(bosh releases | grep weave-scope | cut -d'|' -f3 | tr -d '*' | tr -d ' ')/g" manifests/pcf-runtime-config.yml
-     ```
-   * Set target address for probe
-     ```bash
-     sed -i "s/<SCOPE-APP-IP>/$(bosh vms scope-app | grep scope_app | cut -d'|' -f6 | tr -d ' ')/g" manifests/pcf-runtime-config.yml
-     ```
    * Set property `weave.scope.probe.cf.api_url` to `$CF_API_URL`
    * Set properties `weave.scope.probe.cf.client_id` and `weave.scope.probe.cf.client_secret` to the credentials chosen for the UAA client created in the previous step.
 

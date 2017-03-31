@@ -1,18 +1,17 @@
 ---
 releases:
 - name: weave-scope
-  version: <WEAVE-SCOPE-RELEASE-VERSION>
+  version: <%= `bosh releases | grep weave-scope | cut -d'|' -f3 | tr -d '*' | tr -d ' '` %>
 
 addons:
 - name: scope-probe
   jobs:
   - name: scope_probe
     release: weave-scope
-    properties:
-      weave:
-        scope:
-          probe:
-            target_addr: <SCOPE-APP-IP>
+    provides:
+      weave_scope_app:
+        as: weave_scope_app
+        shared: true
 - name: scope-garden
   include:
     jobs:

@@ -1,12 +1,12 @@
 ---
-name: scope-app
-director_uuid: <BOSH-DIRECTOR-UUID>
+name: weave-scope
+director_uuid: <%= `bosh status --uuid` %>
 releases:
 - name: weave-scope
   version: latest
 stemcells:
-- alias: <STEMCELL-NAME>
-  os: <STEMCELL-OS>
+- alias: default
+  os: <%= `bosh stemcells | grep agent | cut -d'|' -f3 | tr -d ' ' | uniq | head -n1` %>
   version: latest
 instance_groups:
 - name: scope_app
@@ -18,9 +18,12 @@ instance_groups:
   - name: scope_app
     release: weave-scope
     consumes: {}
-    provides: {}
+    provides:
+      weave_scope_app:
+        as: weave_scope_app
+        shared: true
   vm_type: <SCOPE-APP-VM-TYPE>
-  stemcell: <STEMCELL-NAME>
+  stemcell: default
   properties: {}
   update:
     serial: true
