@@ -6,7 +6,7 @@ builds:
     version: 0.0.2
   6deae67f-b805-4021-a420-fee7aaf5e9c9:
     version: 0.0.3
-  '059096f5-c32b-4986-9393-6ff700023eb0':
+  059096f5-c32b-4986-9393-6ff700023eb0:
     version: 0.0.4
   021ddf1f-705b-40d9-81d7-840d2cc94a3d:
     version: 0.0.5
@@ -18,4 +18,6 @@ builds:
     version: 0.0.8
   e90136f9-e895-4cb1-9610-fc39f4edeab6:
     version: 0.0.9
+  32d85198-3181-42db-84a1-0c3dd5790bb0:
+    version: 0.0.10
 format-version: '2'

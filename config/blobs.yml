@@ -4,9 +4,9 @@ jq/jq:
   sha: d8e36831c3c94bb58be34dd544f44a6c6cb88568
   size: 3027945
 scope/scope:
-  object_id: 52822cae-52f6-43ff-a3e0-176bd6905bb4
-  sha: d721bb11ce1a3e58de894ad9f2e15356694aba85
-  size: 29653232
+  object_id: be0286b0-f085-4a81-ad17-45e08b22fb19
+  sha: 18eac21e225f60d1dfeaa133e466f06ae8e457ea
+  size: 31266104
 scope-garden/scope-garden:
   object_id: 35e26257-17dd-4146-a930-4391aef4c1f7
   sha: 0df2fbc9f2c72625b92c673daa7a5dad461e735a
@@ -15,3 +15,7 @@ scope-bosh/scope-bosh:
   object_id: e6ea2a00-de03-45a9-9061-b9a0d589821a
   sha: 0a1995d8d4ef6ef0fefcc3f2028f9722cde6e9fe
   size: 5232459
+go/go1.8.linux-amd64.tar.gz:
+  object_id: b6fa4d9e-eb35-4f4e-aff2-7ecb423c0f04
+  sha: a93fe8fc245e3554f956bc823f30ef4eb23c2068
+  size: 89803580
