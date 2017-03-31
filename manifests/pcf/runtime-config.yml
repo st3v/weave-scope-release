@@ -8,10 +8,10 @@ addons:
   jobs:
   - name: scope_probe
     release: weave-scope
-    provides:
+    consumes:
       weave_scope_app:
-        as: weave_scope_app
-        shared: true
+        from: weave_scope_app
+        deployment: weave-scope
 - name: scope-garden
   include:
     jobs:
