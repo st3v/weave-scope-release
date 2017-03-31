@@ -28,14 +28,14 @@ You will need the following information which can be retrieved from the Director
     bosh upload release $(ls releases/weave-scope/weave-scope-*.yml | sort -r | head -n1)
     ```
 
-1. Edit `~/workspace/weave-scope-release/manifests/pcf-scope-app.yml` as follows:
+1. Edit `~/workspace/weave-scope-release/manifests/pcf/scope-app.yml` as follows:
    * Replace `<SCOPE-APP-AZ>` with one of the names in the `azs` section retrieved from `bosh cloud-config`
    * Replace `<SCOPE-APP-VM-TYPE>` with one of the name in the `vm_types` section retrieved from `bosh cloud-config`, e.g. `medium.cpu`:
    * Replace `<SCOPE-APP-NETWORK>` with one of the names in the `networks` section retrieved from `bosh cloud-config`
 
 1. Deploy the Scope App:
     ```bash
-    bosh -d ~/workspace/weave-scope-release/manifests/pcf-scope-app.yml deploy
+    bosh -d ~/workspace/weave-scope-release/manifests/pcf/scope-app.yml deploy
     ```
 
 1. Verify the Scope App is up and running by pointing your browser at the IP address assigned to the Scope App instance and port `4040`. You can obtain the IP via `bosh vms weave-scope`. If everything went well, you should see the following.
@@ -53,22 +53,22 @@ You will need the following information which can be retrieved from the Director
      --authorities cloud_controller.admin
    ```
 
-1. Edit `~/workspace/weave-scope-release/manifests/pcf-runtime-config.yml` as follows:
+1. Edit `~/workspace/weave-scope-release/manifests/pcf/runtime-config.yml` as follows:
    * Set property `weave.scope.probe.cf.api_url` to `$CF_API_URL`
    * Set properties `weave.scope.probe.cf.client_id` and `weave.scope.probe.cf.client_secret` to the credentials chosen for the UAA client created in the previous step.
 
-1. Check the currently active BOSH runtime-config by executing `bosh runtime-config`. If the currently active runtime-config is not empty, you will have to merge it with the one specified in `~/workspace/weave-scope-release/manifests/pcf-runtime-config.yml`.
+1. Check the currently active BOSH runtime-config by executing `bosh runtime-config`. If the currently active runtime-config is not empty, you will have to merge it with the one specified in `~/workspace/weave-scope-release/manifests/pcf/runtime-config.yml`.
 
    Update the BOSH `runtime-config`:
    ```bash
-   bosh update runtime-config ~/workspace/weave-scope-release/manifests/pcf-runtime-config.yml
+   bosh update runtime-config ~/workspace/weave-scope-release/manifests/pcf/runtime-config.yml
    ```
 
    Make sure runtime-config has been set by running `bosh runtime-config`.
 
 1. Re-deploy the Scope App:
     ```bash
-    bosh -d ~/workspace/weave-scope-release/manifests/pcf-scope-app.yml deploy
+    bosh -d ~/workspace/weave-scope-release/manifests/pcf/scope-app.yml deploy
     ```
 
 1. In your browser go to the Scope App and verify that it displays a host that represents the Scope App instance.
