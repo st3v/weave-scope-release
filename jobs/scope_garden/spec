@@ -37,6 +37,3 @@ properties:
   weave.scope.probe.cf.refresh_interval:
     description: Interval for fetching apps from CF
     default: 5s
-  weave.scope.probe.bosh.job_spec_path:
-    description: Path to Bosh job spec
-    default: /var/vcap/bosh/spec.json
