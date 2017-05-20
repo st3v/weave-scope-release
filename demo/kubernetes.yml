@@ -1,0 +1,165 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: scope-demo
+  labels:
+    name: scope
+    role: demo
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: scope-demo
+      labels:
+        name: scope
+        role: demo
+    spec:
+      containers:
+      - name: scope
+        image: st3v/weavescope-cf-demo:0.0.10
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: scope
+  labels:
+    name: scope
+    role: frontend
+spec:
+  ports:
+  - name: http
+    port: 4040
+    targetPort: 4040
+    protocol: TCP
+  selector:
+    name: scope
+    role: demo
+
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: letsencrypt
+  labels:
+    name: letsencrypt
+    role: cert-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: letsencrypt
+      labels:
+        name: letsencrypt
+        role: cert-app
+    spec:
+      containers:
+      - name: letsencrypt
+        image: ployst/letsencrypt:0.2.0
+        env:
+        - name: EMAIL
+          value: foo@example.com
+        - name: DOMAINS
+          value: demo.example.com
+        - name: DEPLOYMENTS
+          value: nginx-ssl-proxy
+        # - name: LETSENCRYPT_ENDPOINT
+        #   value: https://acme-staging.api.letsencrypt.org/directory
+        - name: SECRET_NAME
+          value: ssl-certs
+        ports:
+        - name: ssl-proxy-http
+          containerPort: 80
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: letsencrypt
+  labels:
+    name: letsencrypt
+    role: cert-app
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    name: letsencrypt
+    role: cert-app
+
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: nginx-ssl-proxy
+  labels:
+    name: nginx
+    role: ssl-proxy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: nginx-ssl-proxy
+      labels:
+        name: nginx
+        role: ssl-proxy
+    spec:
+      containers:
+      - name: nginx-ssl-proxy
+        image: ployst/nginx-ssl-proxy:0.0.7
+        env:
+        - name: SERVICE_HOST_ENV_NAME
+          value: SCOPE_SERVICE_HOST
+        - name: SERVICE_PORT_ENV_NAME
+          value: SCOPE_SERVICE_PORT_HTTP
+        - name: CERT_SERVICE_HOST_ENV_NAME
+          value: LETSENCRYPT_SERVICE_HOST
+        - name: CERT_SERVICE_PORT_ENV_NAME
+          value: LETSENCRYPT_SERVICE_PORT
+        - name: ENABLE_SSL
+          value: 'true'
+        - name: ENABLE_BASIC_AUTH
+          value: 'false'
+        - name: SERVER_NAME
+          value: demo.example.com
+        - name: WEB_SOCKETS
+          value: 'true'
+        ports:
+        - name: ssl-proxy-http
+          containerPort: 80
+        - name: ssl-proxy-https
+          containerPort: 443
+        volumeMounts:
+        - name: secrets
+          mountPath: /etc/secrets
+          readOnly: true
+      volumes:
+      - name: secrets
+        secret:
+          secretName: ssl-certs
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-ssl-proxy
+  labels:
+    name: nginx
+    role: ssl-proxy
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 443
+      protocol: TCP
+  selector:
+    name: nginx
+    role: ssl-proxy
+  type: LoadBalancer
