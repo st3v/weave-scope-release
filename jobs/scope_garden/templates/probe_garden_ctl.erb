@@ -4,44 +4,53 @@ RUN_DIR=/var/vcap/sys/run/scope
 LOG_DIR=/var/vcap/sys/log/scope
 PIDFILE=${RUN_DIR}/probe_garden
 SCOPE_GARDEN=/var/vcap/packages/scope-garden/bin/scope-garden
-SCOPE_PLUGINS_ROOT=<%= p('weave.scope.probe.plugins.root') %>
 
 case $1 in
 
   start)
-    mkdir -p $RUN_DIR $LOG_DIR ${SCOPE_PLUGINS_ROOT}
-    chown -R vcap:vcap $RUN_DIR $LOG_DIR ${SCOPE_PLUGINS_ROOT}
+    # probe config
+    export HOSTNAME=`cat /var/vcap/bosh/spec.json | /var/vcap/packages/scope-jq/jq -r '.job.name + "/" + (.index | tostring)'`
+    export PLUGINS_ROOT=<%= p('weave.scope.probe.plugins.root') %>
+
+    # garden config
+    export GARDEN_NETWORK=<%= p('weave.scope.probe.garden.network') %>
+    export GARDEN_ADDR=<%= p('weave.scope.probe.garden.addr') %>
+    export GARDEN_REFRESH_INTERVAL=<%= p('weave.scope.probe.garden.refresh_interval') %>
+
+    # cf config
+    <% if_p('weave.scope.probe.cf.api_url') do |url| %>
+    export CF_API_URL=<%= url %>
+    <% end %>
+
+    <% if_p('weave.scope.probe.cf.username') do |username| %>
+    export CF_USERNAME=<%= username %>
+    <% end %>
+
+    <% if_p('weave.scope.probe.cf.password') do |password| %>
+    export CF_PASSWORD=<%= password %>
+    <% end %>
+
+    <% if_p('weave.scope.probe.cf.client_id') do |id| %>
+    export CF_CLIENT_ID=<%= id %>
+    <% end %>
+
+    <% if_p('weave.scope.probe.cf.client_secret') do |secret| %>
+    export CF_CLIENT_SECRET=<%= secret %>
+    <% end %>
+
+    <% if p('weave.scope.probe.cf.skip_ssl_verify') %>
+    export CF_SKIP_SSL_VERIFY=true
+    <% end %>
+
+    export CF_REFRESH_INTERVAL=<%= p('weave.scope.probe.cf.refresh_interval') %>
+
+    mkdir -p $RUN_DIR $LOG_DIR ${PLUGINS_ROOT}
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR ${PLUGINS_ROOT}
 
     echo $$ > $PIDFILE
 
-    export SCOPE_HOSTNAME=`cat /var/vcap/bosh/spec.json | /var/vcap/packages/scope-jq/jq -r '.job.name + "/" + (.index | tostring)'`
-
     chmod +x $SCOPE_GARDEN
     exec $SCOPE_GARDEN \
-      --plugins-root=${SCOPE_PLUGINS_ROOT} \
-      --hostname=${SCOPE_HOSTNAME}\
-      --garden.network=<%= p('weave.scope.probe.garden.network') %> \
-      --garden.addr=<%= p('weave.scope.probe.garden.addr') %> \
-      --garden.refresh-interval=<%= p('weave.scope.probe.garden.refresh_interval') %> \
-      <% if_p('weave.scope.probe.cf.api_url') do |url| %> \
-      --cf.api-url=<%= url %> \
-      <% end %> \
-      <% if_p('weave.scope.probe.cf.username') do |username| %> \
-      --cf.username=<%= username %> \
-      <% end %> \
-      <% if_p('weave.scope.probe.cf.password') do |password| %> \
-      --cf.password=<%= password %> \
-      <% end %> \
-      <% if_p('weave.scope.probe.cf.client_id') do |id| %> \
-      --cf.client-id=<%= id %> \
-      <% end %> \
-      <% if_p('weave.scope.probe.cf.client_secret') do |secret| %> \
-      --cf.client-secret=<%= secret %> \
-      <% end %> \
-      <% if p('weave.scope.probe.cf.skip_ssl_verify') %> \
-      --cf.skip-ssl-verify \
-      <% end %> \
-      --cf.refresh-interval=<%= p('weave.scope.probe.cf.refresh_interval') %> \
         >>  $LOG_DIR/probe_garden.stdout.log \
         2>> $LOG_DIR/probe_garden.stderr.log
 
