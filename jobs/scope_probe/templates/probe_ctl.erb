@@ -15,7 +15,7 @@
 
   # use link if neither service_token nor target_addr have been specified
   if_link('weave_scope_app') do |link|
-    target = link.instances[0].address + ':' + link.p('weave.scope.app.http.port').to_s unless target
+    target = link.instances.map { |i| i.address + ':' + link.p('weave.scope.app.http.port').to_s }.join(" ") unless target
   end
 
   # fallback to localhost if target has not been set explicitly or through a link
@@ -28,7 +28,7 @@ PIDFILE=${RUN_DIR}/probe
 JQ=/var/vcap/packages/scope-jq/jq
 SCOPE=/var/vcap/packages/scope/scope
 SCOPE_PLUGINS_ROOT=<%= p('weave.scope.probe.plugins.root') %>
-TARGET=<%= target %>
+TARGET="<%= target %>"
 
 case $1 in
 
