@@ -42,7 +42,14 @@ case $1 in
     export SCOPE_HOSTNAME=`cat /var/vcap/bosh/spec.json | $JQ -r '.job.name + "/" + (.index | tostring)'`
 
     chmod +x $SCOPE
-    exec $SCOPE --mode=probe --probe.plugins.root=${SCOPE_PLUGINS_ROOT} --probe.docker=false --probe.kubernetes=false --weave=false --no-app --probe.conntrack=false ${TARGET} \
+    exec $SCOPE --mode=probe \
+    --probe.plugins.root=${SCOPE_PLUGINS_ROOT} \
+    --probe.docker=false \
+    --probe.kubernetes=false \
+    --weave=false \
+    --no-app \
+    --probe.conntrack=false \
+    ${TARGET} \
       >>  $LOG_DIR/probe.stdout.log \
       2>> $LOG_DIR/probe.stderr.log
 
