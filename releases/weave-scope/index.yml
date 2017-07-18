@@ -28,4 +28,6 @@ builds:
     version: 0.0.13
   ee432bed-f71a-46a6-b222-2f60198f1b61:
     version: 0.0.14
+  203ec885-4c8a-4e77-82a0-55cc7fbff1b3:
+    version: 0.0.15
 format-version: '2'
