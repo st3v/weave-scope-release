@@ -4,9 +4,9 @@ jq/jq:
   sha: d8e36831c3c94bb58be34dd544f44a6c6cb88568
   size: 3027945
 scope/scope:
-  object_id: b0725684-092a-4aa7-a075-d36f88c9db30
-  sha: f6430365e15bdda6870f85381b355a7338d0d97e
-  size: 31442712
+  object_id: 07278190-4ca8-45c8-82c3-3040a32558a1
+  sha: 39ac8741ed3b3508195706dc0c4b5ba80aa02851
+  size: 43428136
 scope-garden/scope-garden:
   object_id: 35e26257-17dd-4146-a930-4391aef4c1f7
   sha: 0df2fbc9f2c72625b92c673daa7a5dad461e735a
